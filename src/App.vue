@@ -3,6 +3,7 @@ import { ref } from "vue";
 
 const showModal = ref(false);
 const newNote = ref("");
+const errorMessage = ref("");
 const notes = ref([]);
 
 function randomHSLA() {
@@ -10,6 +11,9 @@ function randomHSLA() {
 }
 
 const addNote = () => {
+  if (newNote.value.length < 10) {
+    return (errorMessage.value = "Note needs to be 10 characters or more");
+  }
   notes.value.push({
     id: Math.floor(Math.random() * 1000000),
     text: newNote.value,
@@ -18,6 +22,7 @@ const addNote = () => {
   });
   showModal.value = false;
   newNote.value = "";
+  errorMessage.value = "";
 };
 </script>
 
@@ -26,12 +31,13 @@ const addNote = () => {
     <div v-if="showModal" class="overlay">
       <div class="modal">
         <textarea
-          v-model="newNote"
+          v-model.trim="newNote"
           name="note"
           id="note"
           cols="30"
           rows="10"
         ></textarea>
+        <p v-if="errorMessage">{{ errorMessage }}</p>
         <button @click="addNote">Add note</button>
         <button class="close" @click="showModal = false">Close</button>
       </div>
@@ -150,5 +156,9 @@ header button {
 .modal .close {
   background-color: #d42;
   margin-top: 7px;
+}
+
+.modal p {
+  color: #d42;
 }
 </style>
