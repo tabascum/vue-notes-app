@@ -109,6 +109,7 @@ header button {
   justify-content: space-between;
   margin-right: 20px;
   margin-bottom: 20px;
+  box-shadow: 10px 5px 10px 5px #888;
 }
 
 .cards-container {
