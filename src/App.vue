@@ -112,6 +112,10 @@ header button {
   box-shadow: 10px 5px 10px 5px #888;
 }
 
+.card:hover {
+  transform: translate(35px, -10%);
+}
+
 .cards-container {
   display: flex;
   flex-wrap: wrap;
